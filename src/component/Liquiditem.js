@@ -1,61 +1,75 @@
-import React from 'react'
+import React, { useContext} from 'react'
+import { Acontext } from '../App';
 
-const Liquiditem = () => {
+const Liquiditem = (props) => {
+
+    const context = useContext(Acontext);
+
+    const OnChangeGetValue = (e) => {
+        props.setLiquidItem({ ...props.liquidItem, [e.target.name]: e.target.value })
+    }
+
+    const handelAddItem = () => {
+        let NewItemObj;
+        let User = localStorage.getItem("user");
+        if (User === null) {
+            NewItemObj = [];
+        }
+        else {
+            NewItemObj = JSON.parse(User);
+        }
+        NewItemObj.push(context);
+        localStorage.setItem("user", JSON.stringify(NewItemObj));
+
+        let item = document.getElementById("ItemName");
+        let quantity = document.getElementById("Quantity");
+        let cost = document.getElementById("Cost");
+        item.value = "";
+        quantity.value = "";
+        cost.value = "";
+    }
+
     return (
-        <div className="container my-3">
-            <div class="card shadow p-3 mb-5 bg-body rounded">
-                <div class="card-header bg-primary text-light">
-                    <h1>Liquid Item Details</h1>
-                </div>
-                <div class="card-body">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Item Name</span>
-                        <input type="text" className="form-control" aria-label="Amount (to the nearest dollar)" />
+        <>
+            <div className="container my-3">
+                <div className="card shadow p-3 mb-5 bg-body rounded">
+                    <div className="card-header bg-primary text-light">
+                        <h1>Liquid Item Details</h1>
                     </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Quantity</span>
-                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" />
-                        <span class="input-group-text">
-
-                            <select style={{"border":"none","background-color":"#e9ecef"}}>
-                                <option selected>Liter</option>
-                                <option value="1">Packet</option>
-                                <option value="2">Mili Liter</option>
-                            </select>
-
-                        </span>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Quantity</span>
-                        <div className='mx-3 mt-2'>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                                <label class="form-check-label" for="inlineRadio1">1/2 Liter</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                                <label class="form-check-label" for="inlineRadio1">1 Liter</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                                <label class="form-check-label" for="inlineRadio2">2 Liter</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" />
-                                <label class="form-check-label" for="inlineRadio3">3 Liter</label>
-                            </div>
+                    <div className="card-body">
+                        <div className="input-group mb-3">
+                            <span className="input-group-text">Item Name</span>
+                            <input type="text" className="form-control" name='ItemName' id='ItemName' aria-label="Amount (to the nearest dollar)" onChange={OnChangeGetValue} />
                         </div>
-                    </div>
+                        <div className="input-group mb-3">
+                            <span className="input-group-text">Quantity</span>
+                            <input type="text" className="form-control" name='Quantity' id='Quantity' aria-label="Amount (to the nearest dollar)" onChange={OnChangeGetValue} />
+                            <span className="input-group-text">
+                                <select defaultValue={"Liter"} style={{ "border": "none", "backgroundColor": "#e9ecef" }}>
+                                    <option value="Liter">Liter</option>
+                                    <option value="Mili Liter">Mili Liter</option>
+                                    <option value="Packet">Packet</option>
+                                    <option value="KG">KG</option>
+                                </select>
+                            </span>
+                        </div>
 
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Cost $</span>
-                        <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" />
+                        <div className="input-group mb-3">
+                            <span className="input-group-text">Date</span>
+                            <input type="date" className="form-control" name='Date' id='Date' aria-label="Amount (to the nearest dollar)" onChange={OnChangeGetValue} />
+                        </div>
+
+                        <div className="input-group mb-3">
+                            <span className="input-group-text">Cost $</span>
+                            <input type="number" className="form-control" name='Cost' id='Cost' aria-label="Amount (to the nearest dollar)" onChange={OnChangeGetValue} />
+                        </div>
+                        <button type="button" className="btn btn-primary" onClick={handelAddItem}>Add Item</button>
                     </div>
-                    <button type="button" class="btn btn-primary">Add Item</button>
                 </div>
             </div>
-        </div>
+            <div className="container">
+            </div>
+        </>
     )
 }
 
