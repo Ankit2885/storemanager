@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import { useHistory } from 'react-router-dom'
 
 const DetailsForm = () => {
-    const [radio, setRadio] = useState("")
+    const [radio, setRadio] = useState("/")
 
     let history = useHistory();
 
