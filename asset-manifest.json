@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/storemanager/static/css/main.073c9b0a.css",
-    "main.js": "/storemanager/static/js/main.1f7444cb.js",
-    "static/js/787.bfb89863.chunk.js": "/storemanager/static/js/787.bfb89863.chunk.js",
-    "index.html": "/storemanager/index.html",
-    "main.073c9b0a.css.map": "/storemanager/static/css/main.073c9b0a.css.map",
-    "main.1f7444cb.js.map": "/storemanager/static/js/main.1f7444cb.js.map",
-    "787.bfb89863.chunk.js.map": "/storemanager/static/js/787.bfb89863.chunk.js.map"
+    "main.css": "/storemanger/static/css/main.073c9b0a.css",
+    "main.js": "/storemanger/static/js/main.cecfc431.js",
+    "static/js/787.bfb89863.chunk.js": "/storemanger/static/js/787.bfb89863.chunk.js",
+    "index.html": "/storemanger/index.html",
+    "main.073c9b0a.css.map": "/storemanger/static/css/main.073c9b0a.css.map",
+    "main.cecfc431.js.map": "/storemanger/static/js/main.cecfc431.js.map",
+    "787.bfb89863.chunk.js.map": "/storemanger/static/js/787.bfb89863.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.1f7444cb.js"
+    "static/js/main.cecfc431.js"
   ]
 }
