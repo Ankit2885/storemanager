@@ -13,10 +13,10 @@ import {
 const Acontext = createContext();
 
 function App() {
-  
 
-  const [liquidItem, setLiquidItem] = useState({ ItemName: "", Quantity: "", Cost: "", Date: ""});
-  
+
+  const [liquidItem, setLiquidItem] = useState({ ItemName: "", Quantity: "", Cost: "", Date: "" });
+
   return (
     <>
       <Acontext.Provider value={liquidItem}>

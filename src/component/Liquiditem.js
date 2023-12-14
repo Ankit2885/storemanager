@@ -1,5 +1,6 @@
-import React, { useContext} from 'react'
+import React, { useContext } from 'react'
 import { Acontext } from '../App';
+import DraggableCardList from './DraggableCardList';
 
 const Liquiditem = (props) => {
 
@@ -67,8 +68,7 @@ const Liquiditem = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="container">
-            </div>
+            <DraggableCardList />
         </>
     )
 }

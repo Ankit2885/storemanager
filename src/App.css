@@ -32,7 +32,44 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.item-card {
+  background-color: #e9ecef;
+  height: 200px;
+  width: 300px;
+  margin: 30px;
+}
+
+.delete-card {
+  height: 100%;
+  width: 100%;
+}
+
+.delete-container {
+  height: 200px;
+  width: 300px;
+  margin: 30px;
+  background: gray;
+}
+
+.card-container {
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-item {
+  background-color: red;
+}
+
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
