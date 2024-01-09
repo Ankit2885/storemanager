@@ -57,7 +57,7 @@ const Liquiditem = (props) => {
 
                         <div className="input-group mb-3">
                             <span className="input-group-text">Date</span>
-                            <input type="date" className="form-control" name='Date' id='Date' aria-label="Amount (to the nearest dollar)" onChange={OnChangeGetValue} />
+                            <input type="date" className="form-control" name='Date' id='Date' min={new Date().toISOString().split('T')[0]} aria-label="Amount (to the nearest dollar)" onChange={OnChangeGetValue} />
                         </div>
 
                         <div className="input-group mb-3">

@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 const DetailsForm = () => {
@@ -6,13 +6,13 @@ const DetailsForm = () => {
 
     let history = useHistory();
 
-    const handelClick = (e)=> {
+    const handelClick = (e) => {
         e.preventDefault();
         history.push(radio);
     }
-    const getValue = (e)=>{
+    const getValue = (e) => {
         let radioValue = "/" + e.target.value;
-        setRadio(radioValue); 
+        setRadio(radioValue);
     }
 
     return (
@@ -28,19 +28,19 @@ const DetailsForm = () => {
                     <input type="number" className="form-control" id="phone" name='phone' />
                 </div>
                 <div className="form-check">
-                    <input className="form-check-input" type="radio" name="itemRadios" id="liquiditem" value="liquiditem" onClick={getValue}/>
+                    <input className="form-check-input" type="radio" name="itemRadios" id="liquiditem" value="liquiditem" onClick={getValue} />
                     <label className="form-check-label" htmlFor="liquiditem">
                         Liquid Item
                     </label>
                 </div>
                 <div className="form-check">
-                    <input className="form-check-input" type="radio" name="itemRadios" id="soliditem" value="soliditem" onClick={getValue}/>
+                    <input className="form-check-input" type="radio" name="itemRadios" id="soliditem" value="soliditem" onClick={getValue} />
                     <label className="form-check-label" htmlFor="soliditem">
                         Solid Item
                     </label>
                 </div>
                 <div className="form-check">
-                    <input className="form-check-input" type="radio" name="itemRadios" id="both" value="both" onClick={getValue}/>
+                    <input className="form-check-input" type="radio" name="itemRadios" id="both" value="both" onClick={getValue} />
                     <label className="form-check-label" htmlFor="both">
                         Both Item
                     </label>

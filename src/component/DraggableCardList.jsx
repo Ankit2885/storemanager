@@ -6,7 +6,7 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 const DraggableCardList = () => {
 
     let User = localStorage.getItem("user");
-    const [cardList, setCardList] = useState(JSON.parse(User));
+    const [cardList, setCardList] = useState([]);
 
 
     const reorder = (list, startIndex, endIndex) => {
@@ -42,8 +42,10 @@ const DraggableCardList = () => {
 
     useEffect(() => {
         let user = localStorage.getItem("user");
-        setCardList(JSON.parse(user));
-    }, [])
+        if (user) {
+            setCardList(JSON.parse(user));
+        }
+    }, [User])
 
     return (
         <DragDropContext onDragEnd={setNewData}>
