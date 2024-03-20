@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import ItemTable from './ItemTable';
 
-const Billpage = () => {
+const Billing = () => {
 
     const dailogBoxBtn = useRef(null);
     const dailogBoxClose = useRef(null);
@@ -11,7 +11,7 @@ const Billpage = () => {
         printBill();
     }, []);
 
-    const [UpdateItems, setUpdateItem] = useState({ id: "", eItemName: "", eQuantity: "", eCost: "", eDate: ""});
+    const [UpdateItems, setUpdateItem] = useState({ id: "", eItemName: "", eQuantity: "", eCost: "", eDate: "" });
     const [TotalBill, setTotalBill] = useState({ TotalItem: 0, TotalQuantity: 0, TotalCost: 0 });
 
     let User = localStorage.getItem("user");
@@ -165,4 +165,4 @@ const Billpage = () => {
     )
 }
 
-export default Billpage
+export default Billing

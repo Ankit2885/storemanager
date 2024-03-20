@@ -1,3 +1,21 @@
+/* Color Variable */
+:root {
+  --primary: #0b67ed;
+  --secondary: #738af3;
+  --body: #FFF;
+  --box: #35354F80;
+  --grey: #27273E;
+  --light-grey: #FFFFFF29;
+  --white: #FFFFFF;
+  --dark-blue: #100F27;
+
+  --gunmetal: #2E2E46;
+  --crayola: #33334A;
+  --charcoal: #35354F;
+  --black: #000000;
+  --heading: #fff
+}
+
 .App {
   text-align: center;
 }
@@ -38,6 +56,13 @@
   }
 }
 
+h6 {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  color: var(--heading);
+}
+
 .item-card {
   background-color: #e9ecef;
   height: 200px;
@@ -72,4 +97,161 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+
+.site-wrap {
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 50px;
+  padding-bottom: 80px;
+}
+
+.site-container {
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 50px;
+  padding-bottom: 80px;
+  max-width: 1750px;
+  margin: 0 auto;
+}
+
+.widget-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--dark-blue);
+  border-radius: 10px;
+  border: 1px solid #4a469d;
+  padding: 15px 25px;
+}
+
+.widget-top-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.add-items-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.container-product-list {
+  max-width: 1700px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.theme-btn {
+  display: inline-block;
+  border: 1px solid var(--primary);
+  cursor: pointer;
+  background: linear-gradient(90deg,
+      var(--primary) 0.08%,
+      var(--secondary) 101.7%);
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--white);
+  padding: 12px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.theme-btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  opacity: 0;
+  height: 100%;
+  background: var(--white);
+  transition: all 0.5s ease;
+}
+
+.theme-btn:hover {
+  color: var(--secondary);
+}
+
+.theme-btn:hover::before {
+  width: 100%;
+  opacity: 1;
+}
+
+.theme-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+.theme-btn.full {
+  display: block;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.dividline {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  margin-top: -13px;
+}
+
+.dividline:after {
+  content: "";
+  display: block;
+  width: 3px;
+  height: 35%;
+  background: var(--primary);
+}
+
+.dividline::before {
+  content: "";
+  display: block;
+  width: 3px;
+  height: 33%;
+  background: var(--primary);
+}
+
+.widget-upload {
+  height: 110px;
+  width: 100%;
+  border: 1px dashed #8fa2ff;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.widget-upload input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.theme-modal {
+  background: var(--white);
+  border: 1px solid var(--primary) !important;
+}
+
+.theme-modal .modal-dialog {
+  max-width: 630px;
+}
+
+.theme-modal .modal-content {
+  background: var(--dark-blue);
+  border: none;
+  box-shadow: none;
+  border-radius: 30px;
+  padding: 15px;
 }

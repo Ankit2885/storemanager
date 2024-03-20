@@ -1,46 +1,45 @@
 import './App.css';
-import Navbar from './component/Navbar';
-import DetailsForm from './component/DetailsForm';
-import Liquiditem from './component/Liquiditem';
-import Soliditem from './component/Soliditem';
-import Billpage from './component/Billpage';
-import { useState, createContext } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
-const Acontext = createContext();
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from './component/Header/Navbar.jsx';
+import Home from './component/Home/Home';
+import AddItems from './component/AddItems/AddItems.jsx';
+import AddProduct from './component/ManageProduct/AddProduct/AddProduct.jsx';
+import ManageProduct from './component/ManageProduct/ManageProduct.jsx';
+import MainManageProduct from './component/ManageProduct/MainManageProduct.jsx';
 
 function App() {
 
-
-  const [liquidItem, setLiquidItem] = useState({ ItemName: "", Quantity: "", Cost: "", Date: "" });
-
   return (
     <>
-      <Acontext.Provider value={liquidItem}>
-        <Router>
-          <Navbar />
-          <Switch>
-            <Route exact path="/">
-              <DetailsForm />
-            </Route>
-            <Route exact path="/liquiditem">
-              <Liquiditem liquidItem={liquidItem} setLiquidItem={setLiquidItem} />
-            </Route>
-            <Route exact path="/soliditem">
-              <Soliditem />
-            </Route>
-            <Route exact path="/billpage">
-              <Billpage />
-            </Route>
-          </Switch>
-        </Router>
-      </Acontext.Provider>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/add-items" element={<AddItems />} />
+          <Route exact path="/manage" element={<MainManageProduct />}>
+            <Route index element={<ManageProduct />} />
+            <Route path="manage-product" element={<ManageProduct />} />
+            <Route path="add-product" element={<AddProduct />} />
+          </Route>
+          {/* <Route exact path="/solid-item" element={<Soliditem />} /> */}
+          {/* <Route exact path="/billing" element={<Billing />} /> */}
+
+          {/* nested routing  */}
+          {/* <Route exact path="/lead" element={<PrivateRoute><MainLead /></PrivateRoute>}>
+            <Route index element={<FindLeads />} />
+            <Route path="find-leads" element={<FindLeads />} />
+            <Route path="manage-leads" element={<ManageLeads />} />
+            <Route path="add-leads" element={<AddLeads />} />
+            <Route path="contact-leads" element={<ContactLeads />} />
+            <Route path="create-contact-leads" element={<CreateContactLead />} />
+            <Route path="ai-email" element={<AiEmail />} />
+            <Route path="create-ai-emails" element={<CreateAIEmail />} />
+          </Route> */}
+
+        </Routes>
+      </Router>
     </>
   );
 }
 
 export default App;
-export { Acontext };

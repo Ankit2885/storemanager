@@ -1,9 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-
 const Navbar = () => {
-
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
@@ -17,12 +15,18 @@ const Navbar = () => {
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/">About</Link>
+                            <Link className="nav-link" to="/add-items">Add items</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/view-pay-later">View pay later</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/view-bill">View bill</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/manage">Manage items</Link>
                         </li>
                     </ul>
-                    <form className="d-flex">
-                        <Link className="btn btn-success text-light" to="/billpage">Print Bill</Link>
-                    </form>
                 </div>
             </div>
         </nav>
