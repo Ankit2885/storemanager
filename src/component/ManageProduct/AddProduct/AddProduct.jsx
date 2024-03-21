@@ -2,14 +2,31 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { GoArrowLeft } from "react-icons/go";
 import UploadBulk from './UploadBulk';
+import { useDispatch } from 'react-redux';
+import { onCreateProduct } from '../../../Redux/Actions/ProductAction';
 const AddProduct = () => {
 
+    const dispatch = useDispatch();
+    const [state, setState] = useState({
+        name: "",
+        category: "",
+        price: "",
+        image: ""
+    })
     const [loader, setLoader] = useState({
         submit: false
     })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setState({ ...state, [name]: value });
+    }
+
     const handleSubmit = (e) => {
-        setLoader({ ...loader, submit: true })
         e.preventDefault();
+        setLoader({ ...loader, submit: true });
+        let data = { ...state }
+        dispatch(onCreateProduct(data, loader, setLoader));
     }
 
     return (
@@ -34,6 +51,9 @@ const AddProduct = () => {
                                     class="form-control"
                                     id="name"
                                     placeholder="Enter item name"
+                                    name='name'
+                                    value={state.name}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
@@ -44,6 +64,9 @@ const AddProduct = () => {
                                     class="form-control"
                                     id="category"
                                     placeholder="Enter item category"
+                                    name='category'
+                                    value={state.category}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
@@ -54,6 +77,9 @@ const AddProduct = () => {
                                     class="form-control"
                                     id="price"
                                     placeholder="Enter item price"
+                                    name='price'
+                                    value={state.price}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>

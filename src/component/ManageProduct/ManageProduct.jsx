@@ -1,13 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { GoArrowLeft } from 'react-icons/go'
 import { Link } from 'react-router-dom'
 import ProductRow from './ProductRow'
+import { onFetchAllProducts } from '../../Redux/Actions/ProductAction'
+import { useDispatch } from 'react-redux'
 
 const ManageProduct = () => {
 
+    const dispatch = useDispatch();
     const [loader, setLoader] = useState({
         fetch: false
     })
+
+    const fetchAllProduct = () => {
+        setLoader({ ...loader, fetch: true })
+        let data = {};
+        dispatch(onFetchAllProducts(data, loader, setLoader))
+    }
+
+    useEffect(() => {
+        fetchAllProduct();
+    }, [])
 
     return (
         <div className='site-wrap'>

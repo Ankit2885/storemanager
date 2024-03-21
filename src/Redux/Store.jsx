@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import UserAction from '../src/Redux/Actions/UserAction'
+import { HeaderAlertReducer } from './Reducers/HeaderAlertReducer'
 
 export const store = configureStore({
     reducer: {
-        user: UserAction
+        alert: HeaderAlertReducer
     }
 })

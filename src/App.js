@@ -6,12 +6,28 @@ import AddItems from './component/AddItems/AddItems.jsx';
 import AddProduct from './component/ManageProduct/AddProduct/AddProduct.jsx';
 import ManageProduct from './component/ManageProduct/ManageProduct.jsx';
 import MainManageProduct from './component/ManageProduct/MainManageProduct.jsx';
+import HeaderAlert from './component/CommonComponent/HeaderAlert.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { removeAlert, setAlert } from './Redux/Actions/HeaderAlertAction.jsx';
 
 function App() {
+
+  const dispatch = useDispatch()
+  const alert = useSelector(state => state.alert)
+
+  useEffect(() => {
+    if (alert && alert.message !== "") {
+      setTimeout(() => {
+        dispatch(removeAlert())
+      }, 4000);
+    }
+  }, [alert, dispatch])
 
   return (
     <>
       <Router>
+        <HeaderAlert />
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Home />} />
@@ -21,21 +37,6 @@ function App() {
             <Route path="manage-product" element={<ManageProduct />} />
             <Route path="add-product" element={<AddProduct />} />
           </Route>
-          {/* <Route exact path="/solid-item" element={<Soliditem />} /> */}
-          {/* <Route exact path="/billing" element={<Billing />} /> */}
-
-          {/* nested routing  */}
-          {/* <Route exact path="/lead" element={<PrivateRoute><MainLead /></PrivateRoute>}>
-            <Route index element={<FindLeads />} />
-            <Route path="find-leads" element={<FindLeads />} />
-            <Route path="manage-leads" element={<ManageLeads />} />
-            <Route path="add-leads" element={<AddLeads />} />
-            <Route path="contact-leads" element={<ContactLeads />} />
-            <Route path="create-contact-leads" element={<CreateContactLead />} />
-            <Route path="ai-email" element={<AiEmail />} />
-            <Route path="create-ai-emails" element={<CreateAIEmail />} />
-          </Route> */}
-
         </Routes>
       </Router>
     </>
