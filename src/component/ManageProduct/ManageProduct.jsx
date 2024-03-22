@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { GoArrowLeft } from 'react-icons/go'
 import { Link } from 'react-router-dom'
 import ProductRow from './ProductRow'
 import { onFetchAllProducts } from '../../Redux/Actions/ProductAction'
@@ -8,6 +7,7 @@ import { useDispatch } from 'react-redux'
 const ManageProduct = () => {
 
     const dispatch = useDispatch();
+    const [productData, setProductData] = useState([])
     const [loader, setLoader] = useState({
         fetch: false
     })
@@ -15,7 +15,7 @@ const ManageProduct = () => {
     const fetchAllProduct = () => {
         setLoader({ ...loader, fetch: true })
         let data = {};
-        dispatch(onFetchAllProducts(data, loader, setLoader))
+        dispatch(onFetchAllProducts(data, setProductData, loader, setLoader))
     }
 
     useEffect(() => {
@@ -41,24 +41,29 @@ const ManageProduct = () => {
                         <table className="table widget-table">
                             <tr>
                                 <th>S.NO</th>
+                                <th>Product image</th>
                                 <th>Name</th>
-                                <th>Keyword</th>
+                                <th>category</th>
+                                <th>price</th>
+                                <th>date</th>
                                 <th className="text-end">Action</th>
                             </tr>
 
-                            {[1].length > 0 ?
-                                [1].map((curElem, index) => {
+                            {productData.length > 0 ?
+                                productData.map((curElem, index) => {
                                     return (
                                         <React.Fragment key={index}>
                                             <ProductRow
                                                 curElem={curElem}
                                                 index={index}
+                                                productData={productData}
+                                                setProductData={setProductData}
                                             />
                                         </React.Fragment>
                                     )
                                 })
                                 : <tr>
-                                    <td className="text-center" colSpan={4}>
+                                    <td className="text-center" colSpan={6}>
                                         {loader.fetch ? <i className="fa fa-spin fa-spinner spin-style" /> : "No campaigns created yet."}
                                     </td>
                                 </tr>

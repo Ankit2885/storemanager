@@ -19,8 +19,8 @@ export const CommonAxios = async (url, data) => {
     } catch (error) {
         return {
             status: false,
-            data: "",
-            msg: error.message
+            data: null,
+            msg: error?.response?.data?.message ? error.response.data.message : error.message
         }
     }
 

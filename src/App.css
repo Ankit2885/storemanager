@@ -259,3 +259,69 @@ h6 {
 .group-btn {
   margin-top: 50px;
 }
+
+.widg-icon a {
+  display: inline-block;
+  font-size: 17px;
+  margin: 0 5px !important;
+  color: #212529;
+  cursor: pointer !important;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  width: 80px;
+  height: 80px;
+  border: 3px var(--primary) solid;
+  border-radius: 50%;
+  animation: rotation 1s ease-in-out infinite;
+  text-align: center;
+}
+
+.loader::after {
+  width: 15px;
+  height: 15px;
+  background-color: var(--primary);
+  border-radius: 100%;
+  position: absolute;
+  content: "";
+}
+
+.loader-sec {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.table-profile {
+  background: var(--bg-color);
+  border-radius: 5px;
+  display: inline-block;
+  height: 80px;
+  padding: 10px;
+  width: 80px;
+
+}
+
+.table-profile img {
+  border-radius: 5px;
+  height: 60px;
+  object-fit: cover;
+  width: 60px;
+}
