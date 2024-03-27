@@ -36,11 +36,7 @@ const AddProduct = () => {
         if (e.target.files.length > 0) {
             if (allowedExt.includes(e.target.files[0].type)) {
                 if (e.target.files[0].size < 5000000) {
-                    const formData = new FormData()
-                    formData.append('file', e.target.files[0])
-                    console.log(formData)
-                    dispatch(onCommonUploadFile(formData, false, loader, setLoader))
-                    // setState({ ...state, productImage: e.target.files[0] })
+                    setState({ ...state, productImage: e.target.files[0] })
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -63,11 +59,16 @@ const AddProduct = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoader({ ...loader, submit: true });
-        let data = { ...state }
+        const formData = new FormData()
+        formData.append('name', state.name)
+        formData.append('category', state.category)
+        formData.append('price', state.price)
+        formData.append('file', state.productImage)
         if (_id) {
-            dispatch(onUpdateProduct(data, navigate, loader, setLoader));
+            formData.append('_id', _id)
+            dispatch(onUpdateProduct(formData, navigate, loader, setLoader));
         } else {
-            dispatch(onCreateProduct(data, setState, loader, setLoader));
+            dispatch(onCreateProduct(formData, setState, loader, setLoader));
         }
     }
 
@@ -99,7 +100,7 @@ const AddProduct = () => {
                         <h6>Add Products</h6>
                     </div>
                     <div>
-                        <Link to={"/manage"} className="theme-btn text-decoration-none" style={{ width: "130px" }}><span><GoArrowLeft /> Back</span></Link>
+                        <Link to={"/manage"} className="theme-btn text-decoration-none" style={{ width: "130px" }}><span><GoArrowLeft style={{ fontSize: "17px" }} /> Back</span></Link>
                     </div>
                 </div>
                 <div className="add-items-wrap">
@@ -147,7 +148,7 @@ const AddProduct = () => {
                                     />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="productImage" class="form-label">Upload product image</label>
+                                    <label for="productImage" class="form-label">Upload product image {state._id ? "(leave for same image)" : ""}</label>
                                     <input
                                         type="file"
                                         accept='image/*'
@@ -155,7 +156,7 @@ const AddProduct = () => {
                                         id="productImage"
                                         name='productImage'
                                         onChange={onInputChange}
-                                        required
+                                        required={state._id ? false : true}
                                     />
                                 </div>
                                 <div className="input-outer mt-4">
@@ -167,7 +168,6 @@ const AddProduct = () => {
                             <div className="dividline">
                                 <span>or</span>
                             </div>
-
                         </div>
                         <div className="col-lg-5">
                             <UploadBulk />

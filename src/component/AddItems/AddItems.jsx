@@ -1,6 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { onFetchAllProducts } from '../../Redux/Actions/ProductAction';
+import ProductCard from './ProductCard';
 
 const AddItems = () => {
+
+    const dispatch = useDispatch();
+    const [productData, setProductData] = useState([])
+    const [loader, setLoader] = useState({
+        fetch: false
+    })
+
+    const fetchAllProduct = () => {
+        setLoader({ ...loader, fetch: true })
+        let data = {};
+        dispatch(onFetchAllProducts(data, setProductData, loader, setLoader))
+    }
+
+    useEffect(() => {
+        fetchAllProduct();
+    }, [])
+
     return (
         <div className='site-wrap'>
             <div className="widget-top">
@@ -10,29 +30,21 @@ const AddItems = () => {
             </div>
             <div className="add-items-wrap">
                 <div className="row">
-                    <div className="col-lg-5">
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <div className="col-lg-7">
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-                    </div>
+                    {productData.length > 0 ?
+                        productData.map((curElem, index) => {
+                            return (
+                                <React.Fragment key={index}>
+                                    <ProductCard
+                                        curElem={curElem}
+                                    />
+                                </React.Fragment>
+                            )
+                        })
+                        : ""}
+
                 </div>
             </div>
-        </div>
+        </div >
     )
 
 }

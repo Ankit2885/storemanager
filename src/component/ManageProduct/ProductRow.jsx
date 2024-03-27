@@ -51,7 +51,8 @@ const ProductRow = (props) => {
             <td>{index + 1}</td>
             <td>
                 <span className='table-profile'>
-                    <img src={"https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRhCoNd-a1_D4imW9UOsTpaCCGK5wnu_TZsCpTL3cI81Ykr_eOnIP-N32E7hinTEDihlo9zK4C5BrXC2bD0n3_K2n6stArFF74WqTjHnyE9kHO4DOYaJiIt"} alt="" />
+                    {/* <img src={"https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRhCoNd-a1_D4imW9UOsTpaCCGK5wnu_TZsCpTL3cI81Ykr_eOnIP-N32E7hinTEDihlo9zK4C5BrXC2bD0n3_K2n6stArFF74WqTjHnyE9kHO4DOYaJiIt"} alt="" /> */}
+                    <img src={curElem.productImage} alt="" />
                 </span>
             </td>
             <td>{curElem.name}</td>

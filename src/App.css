@@ -133,7 +133,7 @@ h6 {
 }
 
 .add-items-wrap {
-  max-width: 1200px;
+  max-width: 1800px;
   margin: 0 auto;
   margin-top: 50px;
 }
@@ -316,7 +316,6 @@ h6 {
   height: 80px;
   padding: 10px;
   width: 80px;
-
 }
 
 .table-profile img {
@@ -324,4 +323,18 @@ h6 {
   height: 60px;
   object-fit: cover;
   width: 60px;
+}
+
+.product-card-image {
+  height: 200px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.product-card-image img {
+  height: 100%;
+  width: 100%;
 }
