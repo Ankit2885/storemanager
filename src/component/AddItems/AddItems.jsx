@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
+import { lazy } from 'react';
 import { useDispatch } from 'react-redux'
 import { onFetchAllProducts } from '../../Redux/Actions/ProductAction';
-import ProductCard from './ProductCard';
+import VirtualizedList from './VirtualizedList';
+// import FullScreenLoader from '../CommonComponent/FullScreenLoader';
+const ProductCard = lazy(() => import('./ProductCard'));
 
 const AddItems = () => {
 
@@ -29,20 +32,29 @@ const AddItems = () => {
                 </div>
             </div>
             <div className="add-items-wrap">
-                <div className="row">
-                    {productData.length > 0 ?
-                        productData.map((curElem, index) => {
-                            return (
-                                <React.Fragment key={index}>
-                                    <ProductCard
-                                        curElem={curElem}
-                                    />
-                                </React.Fragment>
-                            )
-                        })
-                        : ""}
-
-                </div>
+                {/* <div className="row"> */}
+                {/* <Suspense fallback={<FullScreenLoader />}>
+                        {productData.length > 0 ?
+                            productData.map((curElem, index) => {
+                                return (
+                                    <React.Fragment key={index}>
+                                        <ProductCard
+                                            index={index}
+                                            curElem={curElem}
+                                        />
+                                    </React.Fragment>
+                                )
+                            })
+                            : ""}
+                    </Suspense > */}
+                <VirtualizedList
+                    productData={productData}
+                    itemHeight={383}
+                    windowHeight={600}
+                    numberOfItems={productData.length}
+                    overScan={10}
+                />
+                {/* </div> */}
             </div>
         </div >
     )
