@@ -58,7 +58,7 @@ const ProductRow = (props) => {
             <td>{curElem.name}</td>
             <td>{curElem.category}</td>
             <td>{curElem.price}</td>
-            <td>{curElem.date.split("T")[0]}</td>
+            <td>{curElem.date?.split("T")[0]}</td>
             <td className="text-end">
                 <span className="widg-icon">
                     <Link to={`/manage/add-product?_id=${curElem._id}`}><BsPencil /></Link>
@@ -76,7 +76,6 @@ const ProductRow = (props) => {
                 alertLoader={sweet.loader}
                 handleClose={onCancel}
                 performDelete={onConfirm}
-
             />
         </tr>
     )

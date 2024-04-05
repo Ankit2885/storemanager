@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const VirtualizedList = (props) => {
+const VirtualizedListLearn = (props) => {
     const { productData, itemHeight, windowHeight, numberOfItems, overScan } = props
 
     const [scrollTop, setScrollTop] = useState(0);
@@ -55,7 +55,7 @@ const VirtualizedList = (props) => {
                 <div style={{
                     border: "2px solid red",
                     transform: `translateY(${startIndex * itemHeight}px`
-                }}>   {/* current data height  */}
+                }}>   {/* current data height it will generate a div according to number fo data show in display   */}
                     {generateRows()}
                 </div>
             </div>
@@ -63,4 +63,4 @@ const VirtualizedList = (props) => {
     )
 }
 
-export default VirtualizedList
+export default VirtualizedListLearn

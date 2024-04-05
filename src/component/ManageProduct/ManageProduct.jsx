@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, lazy, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ProductRow from './ProductRow'
 import { onFetchAllProducts } from '../../Redux/Actions/ProductAction'
 import { useDispatch } from 'react-redux'
+import FullScreenLoader from '../CommonComponent/FullScreenLoader'
+const CustomVirtualizedList = lazy(() => import('../CommonComponent/CustomVirtualizedList'));
 
 const ManageProduct = () => {
 
@@ -36,7 +38,18 @@ const ManageProduct = () => {
                 </div>
             </div>
             <div className="container-product-list">
-                <div className="table-area mt-3">
+                <Suspense fallback={<FullScreenLoader />}>
+                    <CustomVirtualizedList
+                        productData={productData}
+                        setProductData={setProductData}
+                        itemHeight={86}
+                        windowHeight={600}
+                        numberOfItems={productData.length}
+                        overScan={10}
+                        loader={loader}
+                    />
+                </Suspense>
+                {/* <div className="table-area mt-3">
                     <div className="table-responsive">
                         <table className="table widget-table">
                             <tr>
@@ -70,7 +83,7 @@ const ManageProduct = () => {
                             }
                         </table>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )

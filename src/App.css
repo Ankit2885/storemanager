@@ -325,6 +325,13 @@ h6 {
   width: 60px;
 }
 
+.table-profile video {
+  border-radius: 5px;
+  height: 60px;
+  object-fit: cover;
+  width: 60px;
+}
+
 .product-card-image {
   height: 200px;
   width: 200px;

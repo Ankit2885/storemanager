@@ -2,8 +2,8 @@ import React, { Suspense, useEffect, useState } from 'react'
 import { lazy } from 'react';
 import { useDispatch } from 'react-redux'
 import { onFetchAllProducts } from '../../Redux/Actions/ProductAction';
-import VirtualizedList from './VirtualizedList';
-// import FullScreenLoader from '../CommonComponent/FullScreenLoader';
+import InfinityScroll from '../CommonComponent/InfinityScroll';
+import VirtualizedListLearn from './VirtualizedListLearn';
 const ProductCard = lazy(() => import('./ProductCard'));
 
 const AddItems = () => {
@@ -32,6 +32,13 @@ const AddItems = () => {
                 </div>
             </div>
             <div className="add-items-wrap">
+                <div className="row">
+                    <InfinityScroll
+                        state={productData}
+                        totalDataLength={150}
+                    />
+                </div>
+
                 {/* <div className="row"> */}
                 {/* <Suspense fallback={<FullScreenLoader />}>
                         {productData.length > 0 ?
@@ -47,14 +54,15 @@ const AddItems = () => {
                             })
                             : ""}
                     </Suspense > */}
-                <VirtualizedList
+                {/* </div> */}
+
+                {/* <VirtualizedListLearn
                     productData={productData}
                     itemHeight={383}
                     windowHeight={600}
                     numberOfItems={productData.length}
                     overScan={10}
-                />
-                {/* </div> */}
+                /> */}
             </div>
         </div >
     )
