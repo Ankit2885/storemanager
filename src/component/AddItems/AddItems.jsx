@@ -35,7 +35,7 @@ const AddItems = () => {
                 <div className="row">
                     <InfinityScroll
                         state={productData}
-                        totalDataLength={150}
+                        totalDataLength={50}
                     />
                 </div>
 

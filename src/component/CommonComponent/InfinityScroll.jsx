@@ -10,9 +10,13 @@ import { themeColor } from '../Global/Global';
 const InfinityScroll = (props) => {
 
     const { state, totalDataLength } = props
-    const [pageNo, setPageNo] = useState(1)
+    const [mainState, setMainState] = useState({
+        pageNo: 1,
+        loader: false,
+        currentDataLength: 0,
+        totalDataLength: 0
+    })
     const [data, setData] = useState([])
-    const [loader, setLoader] = useState(false);
 
     const handleScrollEvent = () => {
         // console.log(document.documentElement.scrollTop, 'scroll top')
@@ -20,10 +24,32 @@ const InfinityScroll = (props) => {
         // console.log(document.documentElement.scrollHeight, 'scroll height')
         try {
             if ((document.documentElement.scrollTop + window.innerHeight + 1) > document.documentElement.scrollHeight) {
-                if (totalDataLength > data.length && loader === false) {
-                    console.log("working")
-                    setPageNo((prev) => prev + 1);
-                }
+                // this function is called only one time and it will get the page number only when we passed to first time
+                // setPageNo(pageNo + 1);
+                // console.log(mainState.pageNo, "pageno")
+                // console.log(mainState.loader, "loader")
+                // console.log(mainState.totalDataLength, "totalDataLength")
+                // console.log(mainState.currentDataLength, "currentDataLength")
+                setMainState((prev) => {
+                    console.log(prev.pageNo, "pageno")
+                    console.log(prev.loader, "loader")
+                    console.log(prev.totalDataLength, "totalDataLength")
+                    console.log(prev.currentDataLength, "currentDataLength")
+                    if (prev.totalDataLength > prev.currentDataLength && prev.loader === false) {
+                        return {
+                            ...prev,
+                            pageNo: prev.pageNo + 1,
+                            loader: true
+                        }
+                    } else {
+                        return {
+                            ...prev,
+                            pageNo: prev.pageNo,
+                            loader: true
+                        }
+                    }
+
+                })
             }
         } catch (error) {
             console.log(error.message)
@@ -32,23 +58,35 @@ const InfinityScroll = (props) => {
 
     const fetchData = () => {
         setTimeout(() => {
-            let startNumber = (pageNo - 1) * 10
-            let endNumber = pageNo * 10
+            let startNumber = (mainState.pageNo - 1) * 10
+            let endNumber = mainState.pageNo * 10
             let cropArray = state.slice(startNumber, endNumber)
             console.log(startNumber, endNumber, "jj")
             setData([...data, ...cropArray])
-            setLoader(false);
+            setMainState((prev) => {
+                return {
+                    ...prev,
+                    loader: false,
+                    currentDataLength: [...data, ...cropArray].length
+                }
+            })
         }, 3000);
     }
 
-    const getData = () => {
-        setLoader(true);
+    useEffect(() => {
         fetchData();
-    }
+    }, [mainState.pageNo])
 
     useEffect(() => {
-        getData();
-    }, [pageNo, state])
+        setMainState((prev) => {
+            return {
+                ...prev,
+                loader: true,
+                totalDataLength: totalDataLength
+            }
+        })
+        fetchData();
+    }, [state.length, totalDataLength])
 
     useEffect(() => {
         window.addEventListener('scroll', handleScrollEvent)
@@ -73,7 +111,7 @@ const InfinityScroll = (props) => {
             }
             <div className="text-center">
                 {
-                    loader ? <i className="fa fa-spin fa-spinner spin-style" style={{ fontSize: "23px", color: themeColor }} /> : ""
+                    mainState.loader ? <i className="fa fa-spin fa-spinner spin-style" style={{ fontSize: "23px", color: themeColor }} /> : ""
                 }
             </div>
         </div>
