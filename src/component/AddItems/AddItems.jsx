@@ -1,10 +1,8 @@
 import React, { Suspense, useEffect, useState } from 'react'
-import { lazy } from 'react';
 import { useDispatch } from 'react-redux'
 import { onFetchAllProducts } from '../../Redux/Actions/ProductAction';
-import InfinityScroll from '../CommonComponent/InfinityScroll';
-import VirtualizedListLearn from './VirtualizedListLearn';
-const ProductCard = lazy(() => import('./ProductCard'));
+import { themeColor } from '../Global/Global';
+const CustomInfinityScroll = React.lazy(() => import("../CommonComponent/CustomInfinityScroll.jsx"))
 
 const AddItems = () => {
 
@@ -33,36 +31,14 @@ const AddItems = () => {
             </div>
             <div className="add-items-wrap">
                 <div className="row">
-                    <InfinityScroll
-                        state={productData}
-                        totalDataLength={50}
-                    />
+                    <Suspense fallback={<div className="text-center"><i className="fa fa-spin fa-spinner spin-style" style={{ fontSize: "23px", color: themeColor }} /></div>}>
+                        <CustomInfinityScroll
+                            state={productData}
+                            totalDataLength={productData.length}
+                            pagePerData={20}
+                        />
+                    </Suspense>
                 </div>
-
-                {/* <div className="row"> */}
-                {/* <Suspense fallback={<FullScreenLoader />}>
-                        {productData.length > 0 ?
-                            productData.map((curElem, index) => {
-                                return (
-                                    <React.Fragment key={index}>
-                                        <ProductCard
-                                            index={index}
-                                            curElem={curElem}
-                                        />
-                                    </React.Fragment>
-                                )
-                            })
-                            : ""}
-                    </Suspense > */}
-                {/* </div> */}
-
-                {/* <VirtualizedListLearn
-                    productData={productData}
-                    itemHeight={383}
-                    windowHeight={600}
-                    numberOfItems={productData.length}
-                    overScan={10}
-                /> */}
             </div>
         </div >
     )

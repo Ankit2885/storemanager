@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { Children, useEffect, useState } from 'react'
 import ProductCard from '../AddItems/ProductCard';
 import { themeColor } from '../Global/Global';
 
-// logic
+// making logic
 //1. first you need to get the window inner height (this is the height of your visible screen) and then get the scrollTop from the window event and then also get the scroll height (this is the height of all data is coming from the api and you can also say the total height of the scroll) 
 //2. when you add scroll Top and window inner height then you will get the scroll height value 
 //3. once you get the scroll height value then you will check if both value are same then you need to call the api and get more data and concatenate the data with previous data
 
-const InfinityScroll = (props) => {
+const CustomInfinityScroll = (props) => {
 
-    const { state, totalDataLength } = props
+    const { state, totalDataLength, pagePerData } = props
     const [mainState, setMainState] = useState({
         pageNo: 1,
         loader: false,
@@ -31,22 +31,22 @@ const InfinityScroll = (props) => {
                 // console.log(mainState.totalDataLength, "totalDataLength")
                 // console.log(mainState.currentDataLength, "currentDataLength")
                 setMainState((prev) => {
-                    console.log(prev.pageNo, "pageno")
-                    console.log(prev.loader, "loader")
-                    console.log(prev.totalDataLength, "totalDataLength")
-                    console.log(prev.currentDataLength, "currentDataLength")
-                    if (prev.totalDataLength > prev.currentDataLength && prev.loader === false) {
-                        return {
-                            ...prev,
-                            pageNo: prev.pageNo + 1,
-                            loader: true
+                    if (prev.totalDataLength >= prev.currentDataLength && prev.loader === false) {
+                        if (prev.totalDataLength === prev.currentDataLength) {
+                            return {
+                                ...prev,
+                                pageNo: prev.pageNo,
+                                loader: false
+                            }
+                        } else {
+                            return {
+                                ...prev,
+                                pageNo: prev.pageNo + 1,
+                                loader: true
+                            }
                         }
                     } else {
-                        return {
-                            ...prev,
-                            pageNo: prev.pageNo,
-                            loader: true
-                        }
+                        return prev
                     }
 
                 })
@@ -58,10 +58,9 @@ const InfinityScroll = (props) => {
 
     const fetchData = () => {
         setTimeout(() => {
-            let startNumber = (mainState.pageNo - 1) * 10
-            let endNumber = mainState.pageNo * 10
+            let startNumber = (mainState.pageNo - 1) * (pagePerData || 10)
+            let endNumber = mainState.pageNo * (pagePerData || 10)
             let cropArray = state.slice(startNumber, endNumber)
-            console.log(startNumber, endNumber, "jj")
             setData([...data, ...cropArray])
             setMainState((prev) => {
                 return {
@@ -70,7 +69,7 @@ const InfinityScroll = (props) => {
                     currentDataLength: [...data, ...cropArray].length
                 }
             })
-        }, 3000);
+        }, 2000);
     }
 
     useEffect(() => {
@@ -94,7 +93,7 @@ const InfinityScroll = (props) => {
     }, [])
 
     return (
-        <div>
+        <>
             {data.length > 0 ?
                 data.map((curElem, index) => {
                     return (
@@ -114,8 +113,8 @@ const InfinityScroll = (props) => {
                     mainState.loader ? <i className="fa fa-spin fa-spinner spin-style" style={{ fontSize: "23px", color: themeColor }} /> : ""
                 }
             </div>
-        </div>
+        </>
     )
 }
 
-export default InfinityScroll
+export default CustomInfinityScroll

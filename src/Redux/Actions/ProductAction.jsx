@@ -4,7 +4,7 @@ import { setAlert } from "./HeaderAlertAction"
 export const onFetchAllProducts = (data, setProductData, loader, setLoader) => async (dispatch, getState) => {
     let res = await CommonAxios("fetch-all-products", data)
     if (res.status === true) {
-        setProductData(Array(50).fill(res.data).flat())
+        setProductData(Array(1000000).fill(res.data).flat())
         // setProductData(res.data)
     }
     setLoader({ ...loader, fetch: false });
