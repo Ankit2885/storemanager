@@ -1,8 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { HeaderAlertReducer } from './Reducers/HeaderAlertReducer'
+import rootReducers from './Reducers'
 
 export const store = configureStore({
-    reducer: {
-        alert: HeaderAlertReducer
-    }
+    reducer: rootReducers
 })

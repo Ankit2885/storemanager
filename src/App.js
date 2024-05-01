@@ -10,6 +10,7 @@ import HeaderAlert from './component/CommonComponent/HeaderAlert.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { removeAlert, setAlert } from './Redux/Actions/HeaderAlertAction.jsx';
+import ImageEditor from './component/Fabric/ImageEditor/ImageEditor.jsx';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
             <Route path="manage-product" element={<ManageProduct />} />
             <Route path="add-product" element={<AddProduct />} />
           </Route>
+          <Route exact path="fabric" element={<ImageEditor />} />
         </Routes>
       </Router>
     </>
